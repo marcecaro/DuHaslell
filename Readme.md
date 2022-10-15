@@ -5,6 +5,10 @@ This project started from: https://github.com/marcecaro/NewHaskellProject
 ## Install  ghcup
 
 ```shell
+brew install llvm
+echo '' >>  ~/.zshrc
+echo 'export PATH="~/.local/bin:/opt/homebrew/opt/llvm@12/bin:$PATH"' >> ~/.zshrc
+echo 'export C_INCLUDE_PATH="`xcrun --show-sdk-path`/usr/include/ffi"' >> ~/.zshrc
 curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 ```
 
@@ -18,15 +22,15 @@ using `ghcup tui` **install and select** this versions:
 
 - `HLS-1.8.0.0`
 - `cabal-3.8.1.0`
-- `GHC-9.0.2`: This is the lates with lts -> lts-19.24
+- `GHC-9.2.4`: This is the lates with lts -> lts-19.24
 
 ## Setup stack
 
 ### Config
 ```shell 
 stack config set system-ghc --global true
+stack config set resolver nightly-2022-10-11
 stack setup
-stack config set resolver lts-19.24
 ```
 
 ### Init
@@ -34,14 +38,12 @@ stack config set resolver lts-19.24
 [Optional] Inside the project
 
 ```shell
-cd src
 stack init --force
 ```
 Check that the project build: 
 
 
 ```shell
-cd src
 stack build
 ```
 
